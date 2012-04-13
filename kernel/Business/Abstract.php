@@ -27,14 +27,12 @@ abstract class KalonQueBusinessAbstract
     
     protected $_logPath = '';
     
-    public function __construct()
-    {
-    	$this->_init();
-    }
     
-    protected function _init()
+    public function init()
     {
-    	
+    	$this->initLogPath();
+    	$this->initMonitor();
+    	$this->initStore();
     }
     
     public function initLogPath()

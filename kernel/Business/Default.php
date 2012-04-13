@@ -19,11 +19,16 @@ class KalonQueBusinessDefault extends KalonQueBusinessAbstract
     
     protected $_plugins = array();
     
+    
+    
     public function initStore()
     {
         $store     = $this->_controller->getStore();
         $bName     = $this->_name;
         $dataPath  = $this->_controller->getConfig('KALONQUE_DATA_PATH');
+        if (!is_dir($dataPath))
+        	@mkdir($dataPath, 0777);
+        	
         $storePath = $dataPath . '/' . $bName;  
         $store->setItemFilePath($storePath);
         return $store;
@@ -34,6 +39,9 @@ class KalonQueBusinessDefault extends KalonQueBusinessAbstract
         $monitor  = $this->_controller->getMonitor();
         $bName    = $this->_name;
         $varPath  = $this->_controller->getConfig('KALONQUE_VAR_PATH');
+        if (!is_dir($varPath))
+        	@mkdir($varPath, 0777);
+        	
         $fifoPath = $varPath . '/'. $bName . '/' . $bName . '.fifo';
         $monitor->setFifoPath($fifoPath);
         return $monitor;
@@ -41,7 +49,7 @@ class KalonQueBusinessDefault extends KalonQueBusinessAbstract
 
     public function PARSE_DATA($item)
     {
-    	$tmp = unserialize($item);
+    	@$tmp = unserialize($item);
     	if (false !== $tmp)
     	    return $tmp;
     	else

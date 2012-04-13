@@ -367,8 +367,7 @@ abstract class KalonQueControllerAbstract
         else 
             $this->setStore($storeInstance);
          
-        $busInstance->initStore();
-        $busInstance->initMonitor();    
+        $busInstance->init();  
         
         $plugins = $busInstance->getPlugins();
         for ($i = 0, $max = count($plugins); $i < $max; $i++)
